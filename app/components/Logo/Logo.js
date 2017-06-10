@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
-import { View, Text, Keyboard, Animated, Platform } from 'react-native';
+import React, { Component, PropTypes } from "react";
+import { View, Text, Keyboard, Animated, Platform } from "react-native";
 
-import styles from './styles';
+import styles from "./styles";
 
 const ANIMATION_DURATION = 250;
 
 class Logo extends Component {
   static propTypes = {
-    tintColor: PropTypes.string,
+    tintColor: PropTypes.string
   };
 
   constructor(props) {
@@ -15,19 +15,19 @@ class Logo extends Component {
 
     this.state = {
       containerImageWidth: new Animated.Value(styles.$largeContainerSize),
-      imageWidth: new Animated.Value(styles.$largeImageSize),
+      imageWidth: new Animated.Value(styles.$largeImageSize)
     };
   }
 
   componentDidMount() {
-    const name = Platform.OS === 'ios' ? 'Will' : 'Did';
+    const name = Platform.OS === "ios" ? "Will" : "Did";
     this.keyboardDidShowListener = Keyboard.addListener(
       `keyboard${name}Show`,
-      this.keyboardWillShow,
+      this.keyboardWillShow
     );
     this.keyboardDidHideListener = Keyboard.addListener(
       `keyboard${name}Hide`,
-      this.keyboardWillHide,
+      this.keyboardWillHide
     );
   }
 
@@ -40,12 +40,12 @@ class Logo extends Component {
     Animated.parallel([
       Animated.timing(this.state.containerImageWidth, {
         toValue: styles.$smallContainerSize,
-        duration: ANIMATION_DURATION,
+        duration: ANIMATION_DURATION
       }),
       Animated.timing(this.state.imageWidth, {
         toValue: styles.$smallImageSize,
-        duration: ANIMATION_DURATION,
-      }),
+        duration: ANIMATION_DURATION
+      })
     ]).start();
   };
 
@@ -53,24 +53,27 @@ class Logo extends Component {
     Animated.parallel([
       Animated.timing(this.state.containerImageWidth, {
         toValue: styles.$largeContainerSize,
-        duration: ANIMATION_DURATION,
+        duration: ANIMATION_DURATION
       }),
       Animated.timing(this.state.imageWidth, {
         toValue: styles.$largeImageSize,
-        duration: ANIMATION_DURATION,
-      }),
+        duration: ANIMATION_DURATION
+      })
     ]).start();
   };
 
   render() {
     const containerImageStyles = [
       styles.containerImage,
-      { width: this.state.containerImageWidth, height: this.state.containerImageWidth },
+      {
+        width: this.state.containerImageWidth,
+        height: this.state.containerImageWidth
+      }
     ];
     const imageStyles = [
       styles.logo,
       { width: this.state.imageWidth },
-      this.props.tintColor ? { tintColor: this.props.tintColor } : null,
+      this.props.tintColor ? { tintColor: this.props.tintColor } : null
     ];
 
     return (
@@ -78,12 +81,12 @@ class Logo extends Component {
         <Animated.Image
           resizeMode="contain"
           style={containerImageStyles}
-          source={require('./images/background.png')}
+          source={require("./images/background.png")}
         >
           <Animated.Image
             resizeMode="contain"
             style={imageStyles}
-            source={require('./images/logo.png')}
+            source={require("./images/logo.png")}
           />
         </Animated.Image>
         <Text style={styles.text}>Currency Converter</Text>
