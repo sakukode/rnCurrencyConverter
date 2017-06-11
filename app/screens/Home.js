@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import { StatusBar, KeyboardAvoidingView } from "react-native";
 
 import { Container } from "../components/Container";
@@ -16,12 +16,16 @@ const TEMP_CONVERSION_RATE = 0.7974;
 const TEMP_CONVERSION_DATE = new Date();
 
 class Home extends Component {
+  static propTypes = {
+    navigation: PropTypes.object,
+  }
+
   handlePressBaseCurrency = () => {
-    console.log("press base");
+    this.props.navigation.navigate('CurrencyList', { title: 'Base Currency' });
   };
 
   handlePressQuoteCurrency = () => {
-    console.log("press quote");
+    this.props.navigation.navigate('CurrencyList', { title: 'Quote Currency' });
   };
 
   handleTextChange = text => {
@@ -32,15 +36,15 @@ class Home extends Component {
     console.log("press swap currency");
   };
 
-  handleOptionsPress = () => {
-    console.log("options press");
+  handlePressOptions = () => {
+    this.props.navigation.navigate('Options');
   };
 
   render() {
     return (
       <Container>
         <StatusBar translucent={false} barStyle="light-content" />
-        <Header onPress={this.handleOptionsPress} />
+        <Header onPress={this.handlePressOptions} />
         <KeyboardAvoidingView behavior="padding">
           <Logo />
           <InputWithButton
