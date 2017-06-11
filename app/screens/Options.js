@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, StatusBar, Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import { ListItem, Separator } from '../components/List';
 
@@ -20,17 +21,19 @@ class Options extends Component {
 	  return (
 		<ScrollView>
 		  <StatusBar translucent={false} barStyle="default" />
-          <ListItem 
+          <ListItem
             text="Themes"
-            onPress={this.handlePressThemes}           
+            onPress={this.handlePressThemes}
+            customIcon={<Ionicons name={`${ICON_PREFIX}-arrow-forward`} size={ICON_SIZE} color={ICON_COLOR} />}
           />
           <Separator />
-          <ListItem 
+          <ListItem
             text="Fixer.io"
-            onPress={this.handlePressSite}           
+            onPress={this.handlePressSite}
+            customIcon={<Ionicons name={`${ICON_PREFIX}-link`} size={ICON_SIZE} color={ICON_COLOR} />}
           />
           <Separator />
-	    </ScrollView>	
+	    </ScrollView>
 	  );
   }
 }
