@@ -10,8 +10,8 @@ import {
 
 const initialState = {
   baseCurrency: 'USD',
-  quoteCurrency: 'GBP',
-  amount: 100,
+  quoteCurrency: 'IDR',
+  amount: 1,
   error: null,
   conversions: {},
 };
