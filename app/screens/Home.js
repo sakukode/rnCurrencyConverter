@@ -9,7 +9,7 @@ import { ClearButton } from "../components/Buttons";
 import { LastConverted } from "../components/Text";
 import { Header } from "../components/Header";
 
-import { changeCurrencyAmount, swapCurrency } from '../actions/currencies';
+import { changeCurrencyAmount, swapCurrency, getInitialConversion } from '../actions/currencies';
 
 class Home extends Component {
   static propTypes = {
@@ -22,6 +22,10 @@ class Home extends Component {
     LastConvertedDate: PropTypes.object,
     isFetching: PropTypes.bool,
     primaryColor: PropTypes.string,
+  }
+
+  componentWillMount() {
+    this.props.dispatch(getInitialConversion());
   }
 
   handlePressBaseCurrency = () => {
@@ -48,7 +52,7 @@ class Home extends Component {
 
   render() {
     let quotePrice = '...';
-    if(!this.props.isFetching) {
+    if (!this.props.isFetching) {
       quotePrice = (this.props.amount * this.props.conversionRate).toFixed(2);
     }
 
